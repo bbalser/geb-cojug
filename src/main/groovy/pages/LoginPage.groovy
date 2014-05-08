@@ -12,4 +12,10 @@ class LoginPage extends Page {
         loginButton(to: [LoginFailurePage, DashboardPage]) { $('input', type:'submit') }
     }
 
+    def login() {
+        loginForm.username = 'bbalser'
+        loginForm.password = 'password'
+        loginButton.click()
+    }
+
 }
