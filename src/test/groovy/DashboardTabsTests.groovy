@@ -15,31 +15,31 @@ class DashboardTabsTests extends GebReportingTest {
     void informationTabShouldBeDefault() {
         at DashboardPage
 
-        assert informationTabBody.displayed
+        assert informationTab.isVisible()
     }
 
     @Test
     void searchTabCanBeClickedToMakeVisible() {
         at DashboardPage
-        searchTabLink.click()
+        searchTab.select()
 
-        assert searchTabBody.displayed
+        assert searchTab.isVisible()
     }
 
     @Test
     void logoutTabCanBeClickedToMakeVisible() {
         at DashboardPage
-        logoutTabLink.click()
+        logoutTab.select()
 
-        assert logoutTabBody.displayed
+        assert logoutTab.isVisible()
     }
 
     @Test
     void informationTabCanBeClickedToMakeVisible() {
         at DashboardPage
-        informationTabLink.click()
+        informationTab.select()
 
-        assert informationTabBody.displayed
+        assert informationTab.isVisible()
     }
 
 }

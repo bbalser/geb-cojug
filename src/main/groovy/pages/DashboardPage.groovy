@@ -1,6 +1,7 @@
 package pages
 
 import geb.Page
+import modules.JqueryUITab
 
 class DashboardPage extends Page {
 
@@ -10,17 +11,9 @@ class DashboardPage extends Page {
     static content = {
         logoutButton(wait: true) { $('#logout-button') }
 
-        tabLink(wait: true) { tabId -> $('a.ui-tabs-anchor', href: endsWith(tabId)) }
-        tabBody(wait: true) { tabId -> $("div#${tabId}") }
-
-        informationTabLink(wait: true) { tabLink('tab-info') }
-        informationTabBody(wait: true) { tabBody('tab-info') }
-
-        searchTabLink(wait: true) { tabLink('tab-search') }
-        searchTabBody(wait: true) { tabBody('tab-search') }
-
-        logoutTabLink { tabLink('tab-logout') }
-        logoutTabBody { tabLink('tab-logout') }
+        informationTab(wait: true) { module JqueryUITab, tabId: 'tab-info' }
+        searchTab(wait: true) { module JqueryUITab, tabId: 'tab-search' }
+        logoutTab(wait: true) { module JqueryUITab, tabId: 'tab-logout' }
     }
 
 }

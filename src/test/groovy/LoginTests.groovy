@@ -38,7 +38,7 @@ class LoginTests extends GebReportingTest {
         loginForm.password = 'password'
         loginButton.click()
         at DashboardPage
-        logoutTabLink.click()
+        logoutTab.select()
 
         logoutButton.click()
 
