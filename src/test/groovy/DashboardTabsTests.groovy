@@ -6,40 +6,37 @@ import pages.LoginPage
 
 class DashboardTabsTests extends GebReportingTest {
 
+    DashboardPage dashboard
+
     @Before
     void setUp() {
-        to(LoginPage).login()
+        dashboard = to(LoginPage).login()
     }
 
     @Test
     void informationTabShouldBeDefault() {
-        at DashboardPage
-
-        assert informationTab.isVisible()
+        assert dashboard.informationTab().isVisible()
     }
 
     @Test
     void searchTabCanBeClickedToMakeVisible() {
-        at DashboardPage
-        searchTab.select()
+        dashboard.searchTab().select()
 
-        assert searchTab.isVisible()
+        assert dashboard.searchTab().isVisible()
     }
 
     @Test
     void logoutTabCanBeClickedToMakeVisible() {
-        at DashboardPage
-        logoutTab.select()
+        dashboard.logoutTab().select()
 
-        assert logoutTab.isVisible()
+        assert dashboard.logoutTab().isVisible()
     }
 
     @Test
     void informationTabCanBeClickedToMakeVisible() {
-        at DashboardPage
-        informationTab.select()
+        dashboard.informationTab().select()
 
-        assert informationTab.isVisible()
+        assert dashboard.informationTab().isVisible()
     }
 
 }

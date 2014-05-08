@@ -6,27 +6,22 @@ import pages.LoginPage
 
 class DashboardTests extends GebReportingTest {
 
+    DashboardPage dashboard
+
     @Before
     void setUp() {
-        to(LoginPage).login()
+        dashboard = to(LoginPage).login()
     }
 
     @Test
     void addArticleShouldSaveArticle() {
-        at DashboardPage
+        dashboard.searchTab().select()
+        dashboard.openArticleEditor()
 
-        searchTab.select()
-        addArticleButton.click()
+        dashboard.saveArticle([title: 'New Title', author: 'Larry', text: 'txt to phone', date: '2014-05-13'])
 
-        articleForm.title = "New Title"
-        articleForm.author = "Larry"
-        articleForm.text = "txt to phone"
-        articleForm.date = "2012-08-02"
-        articleDialog.ok()
-
-        waitFor { !articleDialog.isVisible() }
-
-        waitFor { articleRows.find { it.title == 'New Title' } }
+        waitFor { !dashboard.isArticleEditorOpen() }
+        waitFor { dashboard.findArticle { it.title == 'New Title' } }
     }
 
 }

@@ -13,9 +13,15 @@ class LoginPage extends Page {
     }
 
     def login() {
-        loginForm.username = 'bbalser'
-        loginForm.password = 'password'
+        login('bbalser','password')
+    }
+
+    def login(username, password) {
+        loginForm.username = username
+        loginForm.password = password
         loginButton.click()
+
+        browser.page
     }
 
 }

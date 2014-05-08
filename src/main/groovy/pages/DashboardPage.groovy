@@ -27,6 +27,44 @@ class DashboardPage extends Page {
 
     }
 
+    JqueryUITab informationTab() {
+        informationTab
+    }
+
+    JqueryUITab searchTab() {
+        searchTab
+    }
+
+    JqueryUITab logoutTab() {
+        logoutTab
+    }
+
+    def openArticleEditor() {
+        addArticleButton.click()
+    }
+
+    boolean isArticleEditorOpen() {
+        articleDialog.isVisible()
+    }
+
+    ArticleRow findArticle(Closure closure) {
+        articleRows.find(closure)
+    }
+
+    def saveArticle(Map params) {
+        params.each { name, value ->
+            articleForm[name] = value
+        }
+        articleDialog.ok()
+    }
+
+    def logout() {
+        logoutTab().select()
+        logoutButton.click()
+
+        browser.page
+    }
+
 }
 
 class ArticleRow extends Module {
