@@ -25,6 +25,8 @@ class DashboardPage extends Page {
         articleLink(wait: true) { id -> $("#article-${id}") }
         articleRows(wait: true) { moduleList ArticleRow, $('table.search-results tr').has('td') }
 
+        searchForm(wait: true) { searchTab.body().find('#searchForm') }
+        searchButton(wait: true) { searchForm.find('input', type: 'submit') }
     }
 
     JqueryUITab informationTab() {
@@ -51,6 +53,10 @@ class DashboardPage extends Page {
         articleRows.find(closure)
     }
 
+    List<ArticleRow> articles() {
+        articleRows
+    }
+
     def saveArticle(Map params) {
         params.each { name, value ->
             articleForm[name] = value
@@ -65,6 +71,12 @@ class DashboardPage extends Page {
         browser.page
     }
 
+    def search(String searchTerm) {
+        searchForm.searchTerm = searchTerm
+        searchButton.click()
+    }
+
+
 }
 
 class ArticleRow extends Module {
@@ -73,6 +85,11 @@ class ArticleRow extends Module {
         title { $('td',0).find('a').text() }
         author { $('td',1).text() }
         date { $('td', 2).text() }
+        editLink { $('a') }
+    }
+
+    def edit() {
+        editLink.click()
     }
 
 }

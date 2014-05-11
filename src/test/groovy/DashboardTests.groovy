@@ -17,11 +17,39 @@ class DashboardTests extends GebReportingTest {
     void addArticleShouldSaveArticle() {
         dashboard.searchTab().select()
         dashboard.openArticleEditor()
-
-        dashboard.saveArticle([title: 'New Title', author: 'Larry', text: 'txt to phone', date: '2014-05-13'])
+        def title = "New Title ${System.currentTimeMillis()}"
+        dashboard.saveArticle([title: title, author: 'Larry', text: 'txt to phone', date: '2014-05-13'])
 
         waitFor { !dashboard.isArticleEditorOpen() }
-        waitFor { dashboard.findArticle { it.title == 'New Title' } }
+        waitFor { dashboard.findArticle { it.title == title } }
     }
+
+    @Test
+    void searchArticleShouldFindArticleByTitle() {
+        dashboard.searchTab().select()
+        dashboard.openArticleEditor()
+        def title = "Search Title ${System.currentTimeMillis()}"
+        dashboard.saveArticle([title: title, author: 'Larry', text: 'txt to phone', date: '2014-05-13'])
+
+        dashboard.search(title)
+
+        waitFor { dashboard.findArticle { it.title == title } }
+    }
+
+    @Test
+    void editTest() {
+        dashboard.searchTab().select()
+        dashboard.openArticleEditor()
+        def title = "Edit Title ${System.currentTimeMillis()}"
+        dashboard.saveArticle([title: title, author: 'Larry', text: 'txt to phone', date: '2014-05-13'])
+
+        dashboard.articles()[0].edit()
+
+        def modifiedTitle = title.replaceFirst('Edit', 'Edit2')
+        dashboard.saveArticle([title: modifiedTitle])
+
+        waitFor { dashboard.findArticle { it.title == modifiedTitle } }
+    }
+
 
 }
